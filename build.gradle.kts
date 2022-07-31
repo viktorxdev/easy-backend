@@ -9,7 +9,7 @@ plugins {
 
 group = "ru.viktorxdev"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -17,10 +17,15 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-quartz")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.postgresql:postgresql")
+    implementation("org.liquibase:liquibase-core")
+    implementation("org.apache.commons:commons-csv:1.9.0")
+
+    implementation("ch.qos.logback:logback-classic")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

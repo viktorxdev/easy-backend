@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="2022-07-31-01" author="viktorxdev">
+
+        <createTable tableName="payments">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datetime_transaction" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_unloaded" type="bool">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addAutoIncrement tableName="payments" columnName="id"/>
+
+    </changeSet>
+</databaseChangeLog>
