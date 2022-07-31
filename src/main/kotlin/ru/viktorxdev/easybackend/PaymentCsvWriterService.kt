@@ -23,7 +23,7 @@ class PaymentCsvWriterService(
         .setRecordSeparator("\n")
         .build()
 
-    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedRate = 5, timeUnit = TimeUnit.MINUTES)
     fun enrichCsvFile() {
         val payments = paymentRepository.getNewPayments()
         if (payments.isEmpty()) return
