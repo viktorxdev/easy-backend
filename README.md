@@ -77,7 +77,7 @@ id;account_id;amount;datetime_transaction<br>
 3. Реализовать очередь обмена сообщениями между сервисами
 4. Наполнить БД Postgres «payments» транзакциями из запросов
 5. Наполнить файл transaction.csv транзакциями из запросов
-   Технологии
+#### Технологии
 - Java 11+ /Kotlin 1.3+
 - Spring Boot 2+
 - Postgres 9.6+
