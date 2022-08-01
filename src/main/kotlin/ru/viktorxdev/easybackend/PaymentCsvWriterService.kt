@@ -28,15 +28,20 @@ class PaymentCsvWriterService(
         val payments = paymentRepository.getNewPayments()
         if (payments.isEmpty()) return
         val file = File(path)
-        FileWriter(file, true).use { fileWriter ->
-            CSVPrinter(fileWriter, format).use { csvWriter ->
-                if (file.length() == 0L) {
-                    csvWriter.printRecord("id", "account_id", "amount", "datetime_transaction")
+        runCatching {
+            FileWriter(file, true).use { fileWriter ->
+                CSVPrinter(fileWriter, format).use { csvWriter ->
+                    if (file.length() == 0L) {
+                        csvWriter.printRecord("id", "account_id", "amount", "datetime_transaction")
+                    }
+                    csvWriter.printRecords(payments.values)
                 }
-                csvWriter.printRecords(payments.values)
             }
+            log.info { "${payments.size} lines were appended to csv file" }
+        }.onFailure {
+            log.error(it) { "${payments.size} lines failed to append to csv file" }
+            paymentRepository.rollbackUnloaded(payments.map { p -> p.id })
         }
-        log.info { "${payments.size} lines were appended to csv file" }
     }
 
     private val List<PaymentInfo>.values

@@ -34,6 +34,11 @@ class PaymentRepository(
         """.trimIndent()
     ) { row, _ -> PaymentInfo.from(row) }
 
+    fun rollbackUnloaded(ids: List<Long>) =
+        jdbcTemplate.update(
+            "update payments set is_unloaded = false where id in (:ids)",
+            mapOf("ids" to ids)
+        )
 }
 
 data class PaymentInfo(
